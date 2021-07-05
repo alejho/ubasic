@@ -395,6 +395,13 @@ if_statement(void)
   accept(TOKENIZER_THEN);
   if(r) {
     statement();
+    do {
+      tokenizer_next();
+    } while(tokenizer_token() != TOKENIZER_CR &&
+			tokenizer_token() != TOKENIZER_ENDOFINPUT);
+    if(tokenizer_token() == TOKENIZER_CR) {
+        tokenizer_next();
+    }
   } else {
     do {
       tokenizer_next();
